@@ -3,6 +3,7 @@ import cors from 'cors';
 import mongoose from 'mongoose';
 import path from 'path';
 import cookieParser from 'cookie-parser';
+import { errors } from 'celebrate';
 import { requestLogger, errorLogger } from './middlewares/logger';
 import router from './routes';
 import errorHandler from './middlewares/error-handler';
@@ -21,6 +22,8 @@ app.use(requestLogger);
 
 // Все роуты
 app.use(router);
+
+app.use(errors());
 
 // Логгер ошибок — ПОСЛЕ роутов, ДО обработчика ошибок
 app.use(errorLogger);
